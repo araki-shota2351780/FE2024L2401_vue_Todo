@@ -3,21 +3,33 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title></title>
+    <title>To-Do App</title>
   </head>
   <body>
     <div id="app">
       <article class="wrap">
         <!-- section要素追加 todo-form -->
-
+        <section class="todo-form">
           <!-- テキストボックスを追加 -->
-
+          <input
+            type="text"
+            v-model="newTodo"
+            placeholder="please input todo"
+          />
           <!-- ボタンを追加 -->
+          <button @click="addTodo">ADD TODO</button>
+        </section>
 
         <!-- section要素追加 list-area -->
-
-              <!-- todosをリストレンダリング -->
-               
+        <section class="list-area">
+          <h3>incomplete items</h3>
+          <ul>
+            <!-- todosをリストレンダリング -->
+            <li v-for="todo in todos" :key="todo">
+              {{ todo }}
+            </li>
+          </ul>
+        </section>
       </article>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

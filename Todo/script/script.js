@@ -3,21 +3,11 @@ new Vue({
   data() {
     return {
       newTodo: '', // 入力中のタスク
-      todos: [], // タスクのリスト
+      todos: [], // タスクリスト
     };
   },
-  computed: {
-    // 完了タスク
-    doneTodo() {
-      return this.todos.filter((todo) => todo.isDone === true);
-    },
-    // 未完了タスク
-    incompleteTodo() {
-      return this.todos.filter((todo) => todo.isDone === false);
-    },
-  },
   methods: {
-    // タスク追加
+    // タスクを追加
     addTodo() {
       if (this.newTodo.trim() !== '') {
         this.todos.push({
@@ -25,24 +15,29 @@ new Vue({
           text: this.newTodo.trim(),
           isDone: false,
         });
-        this.newTodo = ''; // 入力欄をクリア
+        this.newTodo = '';
       }
     },
-    // タスク削除
+    // タスクの削除
     deleteTodo(id) {
-      const index = this.getIndexBy(id);
-      this.todos.splice(index, 1);
+      this.todos = this.todos.filter((todo) => todo.id !== id);
     },
-    // 完了・未完了の切り替え
+    // 完了状態を切り替え
     toggleIsDone(id) {
-      const index = this.getIndexBy(id);
-      this.todos[index].isDone = !this.todos[index].isDone;
+      const todo = this.todos.find((todo) => todo.id === id);
+      if (todo) {
+        todo.isDone = !todo.isDone;
+      }
     },
-    // IDからインデックス取得
-    getIndexBy(id) {
-      const filteredTodo = this.todos.filter((todo) => todo.id === id)[0];
-      const index = this.todos.indexOf(filteredTodo);
-      return index;
+  },
+  computed: {
+    // 完了したタスク
+    doneTodo() {
+      return this.todos.filter((todo) => todo.isDone);
+    },
+    // 未完了のタスク
+    incompleteTodo() {
+      return this.todos.filter((todo) => !todo.isDone);
     },
   },
 });

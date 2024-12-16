@@ -2,14 +2,14 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do App</title>
-    <link rel="stylesheet" href="/Todo/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <div id="app">
       <article class="wrap">
-        <!-- TODO フォーム -->
+        <!-- ToDo入力フォーム -->
         <section class="todo-form">
           <input
             type="text"
@@ -20,56 +20,59 @@
           <button @click="addTodo" class="add-button">ADD TODO</button>
         </section>
 
-        <!-- 未完了エリア -->
-        <section class="list-area area-incomplete">
-          <p class="todo-title">incomplete items</p>
-          <ul class="todo-area">
-            <li v-for="(item, i) in incompleteTodo" :key="i" class="list">
-              <span class="list-label">{{ item.text }}</span>
-              <span class="button-area">
-                <button
-                  class="list-button button-done"
-                  @click="toggleIsDone(item.id)"
-                >
-                  DONE
-                </button>
-                <button
-                  class="list-button button-delete"
-                  @click="deleteTodo(item.id)"
-                >
-                  DELETE
-                </button>
-              </span>
-            </li>
-          </ul>
-        </section>
+        <!-- ToDoリスト表示エリア -->
+        <div class="list-area">
+          <!-- 未完了のToDoリスト -->
+          <div class="area-incomplete">
+            <p class="todo-title">incomplete items</p>
+            <ul class="todo-area">
+              <li v-for="(item, i) in incompleteTodo" :key="i" class="list">
+                <span class="list-label">{{ item.text }}</span>
+                <div>
+                  <button
+                    class="list-button button-done"
+                    @click="toggleIsDone(item.id)"
+                  >
+                    DONE
+                  </button>
+                  <button
+                    class="list-button button-delete"
+                    @click="deleteTodo(item.id)"
+                  >
+                    DELETE
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
 
-        <!-- 完了エリア -->
-        <section class="list-area area-complete">
-          <p class="todo-title">complete items</p>
-          <ul class="todo-area">
-            <li v-for="(item, i) in doneTodo" :key="i" class="list">
-              <span class="list-label">{{ item.text }}</span>
-              <span class="button-area">
-                <button
-                  class="list-button"
-                  @click="toggleIsDone(item.id)"
-                >
-                  RETURN
-                </button>
-                <button
-                  class="list-button button-delete"
-                  @click="deleteTodo(item.id)"
-                >
-                  DELETE
-                </button>
-              </span>
-            </li>
-          </ul>
-        </section>
+          <!-- 完了したToDoリスト -->
+          <div class="area-complete">
+            <p class="todo-title">complete items</p>
+            <ul class="todo-area">
+              <li v-for="(item, i) in doneTodo" :key="i" class="list">
+                <span class="list-label">{{ item.text }}</span>
+                <div>
+                  <button
+                    class="list-button"
+                    @click="toggleIsDone(item.id)"
+                  >
+                    RETURN
+                  </button>
+                  <button
+                    class="list-button button-delete"
+                    @click="deleteTodo(item.id)"
+                  >
+                    DELETE
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </article>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/Todo/script/script.js"></script>
+    <script src="script/script.js"></script>
   </body>
 </html>

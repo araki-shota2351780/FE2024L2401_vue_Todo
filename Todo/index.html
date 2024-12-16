@@ -4,35 +4,72 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>To-Do App</title>
+    <link rel="stylesheet" href="/Todo/css/styles.css" />
   </head>
   <body>
     <div id="app">
       <article class="wrap">
-        <!-- section要素追加 todo-form -->
+        <!-- TODO フォーム -->
         <section class="todo-form">
-          <!-- テキストボックスを追加 -->
           <input
             type="text"
             v-model="newTodo"
+            class="input-text"
             placeholder="please input todo"
           />
-          <!-- ボタンを追加 -->
-          <button @click="addTodo">ADD TODO</button>
+          <button @click="addTodo" class="add-button">ADD TODO</button>
         </section>
 
-        <!-- section要素追加 list-area -->
-        <section class="list-area">
-          <h3>incomplete items</h3>
-          <ul>
-            <!-- todosをリストレンダリング -->
-            <li v-for="todo in todos" :key="todo">
-              {{ todo }}
+        <!-- 未完了エリア -->
+        <section class="list-area area-incomplete">
+          <p class="todo-title">incomplete items</p>
+          <ul class="todo-area">
+            <li v-for="(item, i) in incompleteTodo" :key="i" class="list">
+              <span class="list-label">{{ item.text }}</span>
+              <span class="button-area">
+                <button
+                  class="list-button button-done"
+                  @click="toggleIsDone(item.id)"
+                >
+                  DONE
+                </button>
+                <button
+                  class="list-button button-delete"
+                  @click="deleteTodo(item.id)"
+                >
+                  DELETE
+                </button>
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 完了エリア -->
+        <section class="list-area area-complete">
+          <p class="todo-title">complete items</p>
+          <ul class="todo-area">
+            <li v-for="(item, i) in doneTodo" :key="i" class="list">
+              <span class="list-label">{{ item.text }}</span>
+              <span class="button-area">
+                <button
+                  class="list-button"
+                  @click="toggleIsDone(item.id)"
+                >
+                  RETURN
+                </button>
+                <button
+                  class="list-button button-delete"
+                  @click="deleteTodo(item.id)"
+                >
+                  DELETE
+                </button>
+              </span>
             </li>
           </ul>
         </section>
       </article>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./script/script.js"></script>
+    <script src="/Todo/script/script.js"></script>
   </body>
 </html>
